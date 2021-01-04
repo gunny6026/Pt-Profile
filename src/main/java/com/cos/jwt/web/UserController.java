@@ -8,6 +8,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.web.PageableDefault;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.jwt.domain.user.User;
+import com.cos.jwt.domain.user.UserDTO;
 import com.cos.jwt.domain.user.UserRepository;
 import com.cos.jwt.service.UserService;
 
@@ -54,7 +56,7 @@ public class UserController {
 	@GetMapping("/user/info") // 유저 개인정보
 	public ResponseEntity<?> userInfo(){
 		User user = (User) session.getAttribute("principal");
-		User userEntity = useService.info(user);
+		User userEntity = userService.info(user);
 		
 		return new ResponseEntity<User>(userEntity, HttpStatus.OK);
 	}
