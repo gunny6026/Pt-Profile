@@ -1,4 +1,4 @@
-package com.cos.jwt.order;
+package com.cos.jwt.domain.order;
 
 import java.security.Timestamp;
 
@@ -12,8 +12,8 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.cos.jwt.domain.pt.Pt;
+import com.cos.jwt.domain.st.St;
 import com.cos.jwt.domain.user.User;
-import com.cos.jwt.st.St;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 public class MpOrder {

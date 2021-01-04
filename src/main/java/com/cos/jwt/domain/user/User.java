@@ -13,9 +13,9 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
+import com.cos.jwt.domain.order.MpOrder;
 import com.cos.jwt.domain.pt.Pt;
-import com.cos.jwt.order.MpOrder;
-import com.cos.jwt.wish.MpWish;
+import com.cos.jwt.domain.wish.MpWish;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;

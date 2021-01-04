@@ -1,4 +1,4 @@
-package com.cos.jwt.wish;
+package com.cos.jwt.domain.wish;
 
 import java.sql.Timestamp;
 
@@ -14,7 +14,6 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import com.cos.jwt.domain.pt.Pt;
 import com.cos.jwt.domain.user.User;
-import com.cos.jwt.st.St;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -44,7 +43,7 @@ public class MpWish {
 	@ManyToOne
 	@JsonIgnoreProperties({"user","orders"})
 	@JoinColumn(name="wish_st_no")
-	private St st;
+	private com.cos.jwt.domain.st.St st;
 	
 	@CreationTimestamp
 	private Timestamp orederDate;

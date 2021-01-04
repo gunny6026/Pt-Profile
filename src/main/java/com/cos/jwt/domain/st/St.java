@@ -1,4 +1,4 @@
-package com.cos.jwt.st;
+package com.cos.jwt.domain.st;
 
 import java.util.List;
 
@@ -11,8 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.cos.jwt.domain.order.MpOrder;
 import com.cos.jwt.domain.user.User;
-import com.cos.jwt.order.MpOrder;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;

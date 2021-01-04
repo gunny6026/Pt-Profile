@@ -64,6 +64,20 @@ public class UserService {
 		return userRepository.findAll(page);
 	}
 	
+	@Transactional //트레이너 피티 등록 권한 주기
+	public void userAuth(int userNo) {
+		User trainer = userRepository.findById(userNo)
+				.orElseThrow(() -> new IllegalArgumentException(userNo + "번의 유저는 없습니다."));
+		if(trainer !=null) {
+			trainer.setAuth_pt(3);
+			System.out.println("권한 주기 성공!!");
+		}else {
+			
+			System.out.println("권한 주기 실패");
+		}
+	}
+	
+	
 	@Transactional
 	public String login(@RequestBody User user) {
 		

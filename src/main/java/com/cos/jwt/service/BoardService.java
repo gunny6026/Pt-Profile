@@ -12,21 +12,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.cos.jwt.domain.board.Board;
+import com.cos.jwt.domain.board.BoardDTO;
 import com.cos.jwt.domain.board.BoardRepository;
 import com.cos.jwt.domain.user.User;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Service
 public class BoardService {
 	
-	@Autowired
-	BoardRepository boardRepository;
+
+	private final BoardRepository boardRepository;
 	
 	
 	//게시판 글쓰기
 	@Transactional
-	public void write(Board board, User principal) {
+	public void boardWrite(Board board, User user) {
 		
-		board.setUser(principal);
+		board.setUser(user);
 		
 		boardRepository.save(board);
 		
@@ -45,24 +49,24 @@ public class BoardService {
 	
 	//게시판 글 상세
 	@Transactional
-	public Board detail( int id) {
+	public Board boardDetail( int no) {
 		
-		return boardRepository.findById(id).orElseThrow(
-				() -> new IllegalArgumentException(id+"는 존재하지 않습니다.")
+		return boardRepository.findById(no).orElseThrow(
+				() -> new IllegalArgumentException(no+"는 존재하지 않습니다.")
 				);
 	}
 	
 	@Transactional
-	public int update(Board board, int board_no, User principal) {
+	public int boardModify(BoardDTO dto, int no, User user) {
 		
-		Board boardEntity = boardRepository.findById(board_no).orElseThrow(
+		Board board = boardRepository.findById(no).orElseThrow(
 				()-> new IllegalArgumentException("해당 게시글이 없습니다.") );
 		
 		
-		if(boardEntity.getUser().getUser_no() == principal.getUser_no()) {
+		if(board.getUser().getId().equals(user.getId())) {
 			
-			boardEntity.setTitle(board.getTitle());
-			boardEntity.setContent(board.getContent());
+			board.setTitle(dto.getTitle());
+			board.setContent(dto.getContent());
 			return 1;
 		}else {
 			
@@ -72,13 +76,13 @@ public class BoardService {
 	}
 	
 	@Transactional
-	public int delete(int board_no, User principal) {
+	public int boardRemove(int no, User user) {
 		
-		Board boardEntity = boardRepository.findById(board_no).
+		Board board = boardRepository.findById(no).
 				orElseThrow(()-> new IllegalArgumentException("해당 아이디가 없습니다") );
 		
-		if(boardEntity.getUser().getUser_no() == principal.getUser_no()) {
-			
+		if(board.getUser().getUserNo()==user.getUserNo()) {
+			boardRepository.deleteById(no);
 			return 1;
 		}else {
 			return 0;
