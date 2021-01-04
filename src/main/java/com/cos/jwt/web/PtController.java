@@ -1,5 +1,6 @@
 package com.cos.jwt.web;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.cos.jwt.domain.pt.Pt;
 import com.cos.jwt.domain.pt.PtRepository;
@@ -20,7 +23,6 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("all")
 public class PtController {
 	
 	private final PtService ptService;
@@ -28,13 +30,13 @@ public class PtController {
 	
 	
 	
-	@PostMapping("/pt/write")
-	public ResponseEntity<?> ptwrite(@RequestBody Pt pt) {
+	@PostMapping("/pt/write") //피티 등록
+	public ResponseEntity<?> ptwrite(HttpServletRequest request, @RequestParam("pt_name") String pt_name , @RequestParam("pt_content") String pt_content, @RequestParam("pt_address") String pt_address , @RequestParam("pt_price") int pt_price, @RequestParam("pt_img") MultipartFile pt_img) {
 		
 	
 		
 		User trainer = (User) session.getAttribute("principal");
-		ptService.ptWrite(pt,trainer);
+		ptService.ptWrite(request, trainer, pt_name, pt_content, pt_address, pt_price, pt_img);	
 		
 		return new ResponseEntity<String>("ok",HttpStatus.OK);
 	}
