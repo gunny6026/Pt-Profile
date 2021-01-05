@@ -28,7 +28,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor  // 풀 생성자
 @Data  // getter , setter , to  String
 @Entity // DB에 테이블 생성
-@Builder
 public class User {
 	
 	@Id

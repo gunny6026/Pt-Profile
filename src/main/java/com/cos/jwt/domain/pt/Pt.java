@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import com.cos.jwt.domain.user.User;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
+@Builder
 public class Pt {
 	
 	@Id
@@ -33,8 +35,8 @@ public class Pt {
 	@Column(nullable = false)
 	private String pt_address;
 	
+	private String pt_img;
 	
-	private String img_name;
 	@Column(nullable = false)
 	private String pt_content;
 	

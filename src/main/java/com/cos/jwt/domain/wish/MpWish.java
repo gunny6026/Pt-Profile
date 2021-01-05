@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.cos.jwt.domain.pt.Pt;
+import com.cos.jwt.domain.st.St;
 import com.cos.jwt.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -43,7 +44,7 @@ public class MpWish {
 	@ManyToOne
 	@JsonIgnoreProperties({"user","orders"})
 	@JoinColumn(name="wish_st_no")
-	private com.cos.jwt.domain.st.St st;
+	private St st;
 	
 	@CreationTimestamp
 	private Timestamp orederDate;
